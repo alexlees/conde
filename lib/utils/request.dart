@@ -7,4 +7,15 @@ final _options = BaseOptions(
   connectTimeout: 3000,
   receiveTimeout: 3000,
 );
-Dio request = Dio(_options);
+class CNodeRequest extends Dio {
+  CNodeRequest([BaseOptions options]) {
+    if (options == null) {
+      options = _options;
+    }
+    this.options = options;
+    interceptors.add(CNodeInterceptor());
+  }
+}
+class CNodeInterceptor extends Interceptor {
+}
+CNodeRequest request = CNodeRequest();
